@@ -67,6 +67,7 @@ export interface RenderContext extends EventEmitter {
   hasSelection: boolean
   getSelection: () => Selection | null
   requestSelectionUpdate: () => void
+  enqueuePostRenderOutput: (output: string) => void
   currentFocusedRenderable: Renderable | null
   focusRenderable: (renderable: Renderable) => void
   registerLifecyclePass: (renderable: Renderable) => void
