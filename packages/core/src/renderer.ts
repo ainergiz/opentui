@@ -326,6 +326,7 @@ export class CliRenderer extends EventEmitter implements RenderContext {
   private postProcessFns: ((buffer: OptimizedBuffer, deltaTime: number) => void)[] = []
   private backgroundColor: RGBA = RGBA.fromInts(0, 0, 0, 0)
   private waitingForPixelResolution: boolean = false
+  private postRenderOutputQueue: string[] = []
 
   private rendering: boolean = false
   private renderingNative: boolean = false
@@ -1399,12 +1400,24 @@ export class CliRenderer extends EventEmitter implements RenderContext {
     this.postProcessFns.push(processFn)
   }
 
+  public enqueuePostRenderOutput(output: string): void {
+    if (!output) return
+    this.postRenderOutputQueue.push(output)
+  }
+
   public removePostProcessFn(processFn: (buffer: OptimizedBuffer, deltaTime: number) => void): void {
     this.postProcessFns = this.postProcessFns.filter((fn) => fn !== processFn)
   }
 
   public clearPostProcessFns(): void {
     this.postProcessFns = []
+  }
+
+  private flushPostRenderOutput(): void {
+    if (this.postRenderOutputQueue.length === 0) return
+    const payload = this.postRenderOutputQueue.join("")
+    this.postRenderOutputQueue = []
+    this.writeOut(payload)
   }
 
   public setFrameCallback(callback: (deltaTime: number) => Promise<void>): void {
@@ -1697,6 +1710,7 @@ export class CliRenderer extends EventEmitter implements RenderContext {
 
     if (!this._isDestroyed) {
       this.renderNative()
+      this.flushPostRenderOutput()
 
       const overallFrameTime = performance.now() - overallStart
 

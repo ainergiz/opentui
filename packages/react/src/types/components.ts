@@ -8,6 +8,8 @@ import type {
   CodeRenderable,
   DiffRenderable,
   DiffRenderableOptions,
+  ImageOptions,
+  ImageRenderable,
   InputRenderable,
   InputRenderableOptions,
   LineNumberOptions,
@@ -77,6 +79,8 @@ export type GetNonStyledProperties<TConstructor> =
     ? NonStyledProps | "content"
     : TConstructor extends RenderableConstructor<BoxRenderable>
       ? NonStyledProps | "title"
+      : TConstructor extends RenderableConstructor<ImageRenderable>
+        ? NonStyledProps | "src" | "alt" | "fit"
       : TConstructor extends RenderableConstructor<ASCIIFontRenderable>
         ? NonStyledProps | "text" | "selectable"
         : TConstructor extends RenderableConstructor<InputRenderable>
@@ -143,6 +147,8 @@ export type TextareaProps = ComponentProps<TextareaOptions, TextareaRenderable> 
 export type CodeProps = ComponentProps<CodeOptions, CodeRenderable>
 
 export type DiffProps = ComponentProps<DiffRenderableOptions, DiffRenderable>
+
+export type ImageProps = ComponentProps<ImageOptions, ImageRenderable>
 
 export type SelectProps = ComponentProps<SelectRenderableOptions, SelectRenderable> & {
   focused?: boolean
