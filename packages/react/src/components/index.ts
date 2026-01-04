@@ -3,6 +3,7 @@ import {
   BoxRenderable,
   CodeRenderable,
   DiffRenderable,
+  ImageRenderable,
   InputRenderable,
   LineNumberRenderable,
   ScrollBoxRenderable,
@@ -31,6 +32,7 @@ export const baseComponents = {
   textarea: TextareaRenderable,
   scrollbox: ScrollBoxRenderable,
   "ascii-font": ASCIIFontRenderable,
+  image: ImageRenderable,
   "tab-select": TabSelectRenderable,
   "line-number": LineNumberRenderable,
 

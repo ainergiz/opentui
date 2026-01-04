@@ -8,6 +8,8 @@ import type {
   CodeRenderable,
   DiffRenderable,
   DiffRenderableOptions,
+  ImageOptions,
+  ImageRenderable,
   InputRenderable,
   InputRenderableOptions,
   LineNumberOptions,
@@ -79,9 +81,11 @@ export type GetNonStyledProperties<TConstructor> =
       ? NonStyledProps | "title"
       : TConstructor extends RenderableConstructor<ASCIIFontRenderable>
         ? NonStyledProps | "text" | "selectable"
+        : TConstructor extends RenderableConstructor<ImageRenderable>
+          ? NonStyledProps | "src" | "fit" | "backgroundColor"
         : TConstructor extends RenderableConstructor<InputRenderable>
           ? NonStyledProps | "placeholder" | "value"
-          : TConstructor extends RenderableConstructor<TextareaRenderable>
+        : TConstructor extends RenderableConstructor<TextareaRenderable>
             ? NonStyledProps | "placeholder" | "initialValue"
             : TConstructor extends RenderableConstructor<CodeRenderable>
               ?
@@ -165,6 +169,8 @@ export type TabSelectProps = ComponentProps<TabSelectRenderableOptions, TabSelec
 export type LineNumberProps = ComponentProps<ContainerProps<LineNumberOptions>, LineNumberRenderable> & {
   focused?: boolean
 }
+
+export type ImageProps = ComponentProps<ImageOptions, ImageRenderable>
 
 // ============================================================================
 // Extended/Dynamic Component System
