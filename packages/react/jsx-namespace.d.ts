@@ -5,6 +5,7 @@ import type {
   CodeProps,
   DiffProps,
   ExtendedIntrinsicElements,
+  ImageProps,
   InputProps,
   LineBreakProps,
   LineNumberProps,
@@ -41,6 +42,7 @@ export namespace JSX {
     span: SpanProps
     code: CodeProps
     diff: DiffProps
+    image: ImageProps
     input: InputProps
     textarea: TextareaProps
     select: SelectProps

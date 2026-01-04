@@ -2,6 +2,7 @@ import {
   ASCIIFontRenderable,
   BoxRenderable,
   InputRenderable,
+  ImageRenderable,
   SelectRenderable,
   TabSelectRenderable,
   TextRenderable,
@@ -11,6 +12,7 @@ import {
   type TextOptions,
   type VRenderableOptions,
   type InputRenderableOptions,
+  type ImageOptions,
   type SelectRenderableOptions,
   type TabSelectRenderableOptions,
   FrameBufferRenderable,
@@ -39,6 +41,10 @@ export function ASCIIFont(props?: ASCIIFontOptions, ...children: VChild[]) {
 
 export function Input(props?: InputRenderableOptions, ...children: VChild[]) {
   return h(InputRenderable, props || {}, ...children)
+}
+
+export function Image(props?: ImageOptions, ...children: VChild[]) {
+  return h(ImageRenderable, props || {}, ...children)
 }
 
 export function Select(props?: SelectRenderableOptions, ...children: VChild[]) {
